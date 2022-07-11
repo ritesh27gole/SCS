@@ -22,25 +22,25 @@ Outputs:
    3. Signals to Light and Sound Indicators in Cockpit 
  
 Software-based Modules: 
-   A. APPS Implausibility Check 
-      1. Convert voltage signals from sensors to 0-100% analogy signals 
-      2. Check validity of signals: < 0% and > 100% values to be eliminated 
-      3. Check inconsistency of signals: the difference between two values > 10% 
-      4. Decide which sensor data to use: All 3 or 2 of the 3 
-      5. Signal SDC if invalidity or inconsistency occurs for more than 100 milliseconds 
-      6. Send filtered APPS data to Accelerator-Brake Implausibility Check 
+1. APPS Implausibility Check 
+   1. Convert voltage signals from sensors to 0-100% analogy signals 
+   2. Check validity of signals: < 0% and > 100% values to be eliminated 
+   3. Check inconsistency of signals: the difference between two values > 10% 
+   4. Decide which sensor data to use: All 3 or 2 of the 3 
+   5. Signal SDC if invalidity or inconsistency occurs for more than 100 milliseconds 
+   6. Send filtered APPS data to Accelerator-Brake Implausibility Check 
     
-   B. Accelerator-Brake Implausibility Check 
-      1. Detect Implausibility if hard braking occurs (Brake Fluid Pressure > 30 bars) along with more than 5kW power being delivered to the Motors 
-      2. Signal SDC if implausibility exists for more than 500 milliseconds 
-      3. Change APPS value to 0% after 500 milliseconds under implausibility 
+2. Accelerator-Brake Implausibility Check 
+   1. Detect Implausibility if hard braking occurs (Brake Fluid Pressure > 30 bars) along with more than 5kW power being delivered to the Motors 
+   2. Signal SDC if implausibility exists for more than 500 milliseconds 
+   3. Change APPS value to 0% after 500 milliseconds under implausibility 
   
-   C. D/N Mode Selector 
-      1. Switch into Drive mode from Neutral when TS is active, Brakes are applied and the D/N switch is pressed simultaneously for 1 second 
-      2. Switch into Neutral mode from Drive when Brakes are applied and the D/N switch is pressed simultaneously for 500 milliseconds 
-      3. Switch into Neutral mode from Drive if TS goes offline at any point 
-      4. Turn on a red light on the dashboard when in Neutral and green when in Drive mode 
-      5. Make a buzzer sound when Drive mode is activated for 2 seconds
+3. D/N Mode Selector 
+   1. Switch into Drive mode from Neutral when TS is active, Brakes are applied and the D/N switch is pressed simultaneously for 1 second 
+   2. Switch into Neutral mode from Drive when Brakes are applied and the D/N switch is pressed simultaneously for 500 milliseconds 
+   3. Switch into Neutral mode from Drive if TS goes offline at any point 
+   4. Turn on a red light on the dashboard when in Neutral and green when in Drive mode 
+   5. Make a buzzer sound when Drive mode is activated for 2 seconds
 
 ![image](https://user-images.githubusercontent.com/83658560/178239282-bc5894b8-f87d-402d-9606-acda2fa5f664.png)
 APPS model processes the APPS data into % APPS relaying it to R2D and Motor controller for torque input and also checks if there is any APPS implausibility
