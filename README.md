@@ -63,7 +63,9 @@ We say that two signals are inconsistent if the difference between two values is
 Verification and Decision block
 ![image](https://user-images.githubusercontent.com/83658560/178240740-1db496c9-9c11-4f49-9016-fee8917760f4.png)
 This block takes all the processed data as input, and passes it through a truth table made in accordance with the conditions described in the rules as follows:
+
 ![image](https://user-images.githubusercontent.com/83658560/178241065-cf7dbf0a-a44b-4ed0-ad20-2a8930c0646e.png)
+
 After getting a specific output, that output is matched with the corresponding action and the outputs are generated with respect to that
 ![image](https://user-images.githubusercontent.com/83658560/178241120-c6c2296d-f217-448a-8bff-1a722d21490b.png)
 
