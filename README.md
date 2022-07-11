@@ -43,3 +43,63 @@ Software-based Modules:
     5. Make a buzzer sound when Drive mode is activated for 2 seconds
 
 ![image](https://user-images.githubusercontent.com/83658560/178239282-bc5894b8-f87d-402d-9606-acda2fa5f664.png)
+APPS model processes the APPS data into % APPS relaying it to R2D and Motor controller for torque input and also checks if there is any APPS implausibility
+
+The following blocks are the sub-parts of these models:
+Filter Block
+![image](https://user-images.githubusercontent.com/83658560/178240623-6b74f5d1-fde8-4440-a8a8-af48390ef6e1.png)
+This block takes the individual APPS voltage inputs and filters the signal in order to reduce noise. Finally, the input signal goes through the filter giving APPS % as output.
+
+Validity Check
+![image](https://user-images.githubusercontent.com/83658560/178240665-297c061b-3de1-4f33-8b9e-093827566ee2.png)
+This block checks the vital condition mentioned in the rulebook:
+Check validity of signals: <0% and >100%
+
+Consistency Check
+![image](https://user-images.githubusercontent.com/83658560/178240690-31b0e1fc-a487-4a26-a47c-34716a202ba7.png)
+This block checks inconsistencies between any two signals of the three incoming signals.
+We say that two signals are inconsistent if the difference between two values is greater than 10%
+
+Verification and Decision block
+![image](https://user-images.githubusercontent.com/83658560/178240740-1db496c9-9c11-4f49-9016-fee8917760f4.png)
+This block takes all the processed data as input, and passes it through a truth table made in accordance with the conditions described in the rules as follows:
+![image](https://user-images.githubusercontent.com/83658560/178241065-cf7dbf0a-a44b-4ed0-ad20-2a8930c0646e.png)
+After getting a specific output, that output is matched with the corresponding action and the outputs are generated with respect to that
+![image](https://user-images.githubusercontent.com/83658560/178241120-c6c2296d-f217-448a-8bff-1a722d21490b.png)
+
+APPS and Brake Pedal Sensor Plausibility
+![image](https://user-images.githubusercontent.com/83658560/178241200-cc61e323-4e95-45a9-be4e-96b4a776f3cd.png)
+In this model, we check the condition when both the accelerator and brake are pressed simultaneously by the driver. The exact conditions specified by FB are:
+  1. If hard braking occurs (Brake Fluid Pressure > 30 bars) along with more than 5kW power being delivered to the motors. 
+  2. If implausibility exists for more than 500 milliseconds, change the APPS value to 0%.
+ 
+We take inputs from the DC current sensor on motor supply, pressure sensor on brakes, and APPS %, process the data according to the above conditions and output if an implausibility exists and the value of processed APPS %.
+ 
+The logic table is as follows:
+![image](https://user-images.githubusercontent.com/83658560/178241437-ea8e9116-5e93-4714-95a7-403607c5e1cb.png)
+
+Drive and neutral mode selector
+![image](https://user-images.githubusercontent.com/83658560/178241521-77be56b6-3fce-499e-b108-617d3902ca2e.png)
+Drive and neutral selector model puts the car in either Drive mode or Neutral Mode depending on the current status of the car and relays the status to the driver using a speaker.
+ 
+What it does is:
+   1. Switch into Drive mode from Neutral when TS is active, Brakes are applied and the D/N switch is pressed simultaneously for 1 second 
+   2. Switch into Neutral mode from Drive when Brakes are applied and the D/N switch is pressed simultaneously for 500 milliseconds 
+   3. Switch into Neutral mode from Drive if TS goes offline at any point 
+   4. Turn on a red light on the dashboard when in Neutral and green when in Drive mode 
+   5. Make a buzzer sound when Drive mode is activated for 2 seconds
+
+BPP% to boolean block
+![image](https://user-images.githubusercontent.com/83658560/178241558-c79764bb-f6f8-4307-ba08-22f85229d138.png)
+It looks at the BPP% and checks if it is greater than 20% or not. If it is greater than 20%, then Brakes are said to be “actuated”, otherwise they are said to be “not actuated”.
+
+Drive/neutral activation block
+![image](https://user-images.githubusercontent.com/83658560/178241589-e859cb06-3418-4c99-8994-cd17ef703ef8.png)
+According to the conditions mentioned above, this block checks if the car is in Drive mode or Neutral Mode
+
+Drive mode indication block
+![image](https://user-images.githubusercontent.com/83658560/178241625-4ef99578-3bfd-47e8-8ee8-1c6051019af2.png)
+This block controls the indicators which are used to indicate the mode in which the car is currently.
+
+Complete SCS
+![image](https://user-images.githubusercontent.com/83658560/178241684-f7e9af05-f5d2-4a3d-b237-e4a0e549b0d3.png)
