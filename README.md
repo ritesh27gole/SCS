@@ -10,16 +10,16 @@ The Accelerator-Brake Implausibility check works as a backup for BSPD in SDC. In
 Like most on-road vehicles, our vehicles include Drive and Neutral modes. The motor controller and motor will respond to the APPS data that they received when TS is active.  Hence it's the D/N Mode selector module's responsibility to provide APPS percentage only when in drive mode and 0% when in neutral mode. While the driver demands to switch to drive mode, all necessary checks are performed and the driver needs to press the D/N switch and brakes simultaneously for the whole 1 second at least.  When the vehicle shifts into drive mode successfully, the D/N indicator light will turn green on the dashboard and the buzzer will play a unique sound for 2 seconds. The Simulink model will be converted into software code and implemented on Supervisory Controls Module. 
  
 Inputs: 
-3 Accelerator Pedal Position Sensors 
-DC Current Sensor from Motor power supply 
-Brake Fluid Pressure Sensor 
-Tractive System Status 
-D/N Switch Signal from the cockpit
+   1. 3 Accelerator Pedal Position Sensors 
+   2. DC Current Sensor from Motor power supply 
+   3. Brake Fluid Pressure Sensor 
+   4. Tractive System Status 
+   5. D/N Switch Signal from the cockpit
  
 Outputs: 
-Acceleration data to Motor Controller 
-APPS and Accelerator-Brakes Implausibility to Shutdown Circuit 
-Signals to Light and Sound Indicators in Cockpit 
+   1. Acceleration data to Motor Controller 
+   2. APPS and Accelerator-Brakes Implausibility to Shutdown Circuit 
+   3. Signals to Light and Sound Indicators in Cockpit 
  
 Software-based Modules: 
   APPS Implausibility Check 
